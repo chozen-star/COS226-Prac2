@@ -2,8 +2,8 @@ public class BakeryLock implements Lock
 {
 
     private final int n;
-    private final VolatileBoolean[] flag;
-    private final VolatileInt[] label;
+    private final VolatileBoolean[] flag; // indication on wanting to enter a cs
+    private final VolatileInt[] label; // contains the number when entering the bakery
 
     public BakeryLock(int n) 
     {
@@ -18,6 +18,8 @@ public class BakeryLock implements Lock
     @Override
     public void lock(int threadId) 
     {
+        flag[threadId] = true;
+
 
     }
 
@@ -25,5 +27,15 @@ public class BakeryLock implements Lock
     public void unlock(int threadId) 
     {
         
+    }
+
+    public int max(VolatileInt[] a){
+        int max = 0;
+        for(int i = 0; i < n;i++){
+            if(a[i] > max){
+                max = a[i];
+            }
+        }
+        return max + 1;
     }
 }
