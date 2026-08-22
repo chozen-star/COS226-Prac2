@@ -19,8 +19,15 @@ public class BakeryLock implements Lock
     public void lock(int threadId) 
     {
         flag[threadId] = true;
-
-
+        label[threadId] = max(label);
+        for(int j = 0; j < n;j++){
+            if(j == i){
+                continue;
+            }
+            while(flag[j] && (label[j] < label[i] || (label[j] == label[i] && j < i))){
+                //wait
+            }
+        }
     }
 
     @Override
