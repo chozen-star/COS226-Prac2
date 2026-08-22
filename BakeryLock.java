@@ -33,7 +33,7 @@ public class BakeryLock implements Lock
     @Override
     public void unlock(int threadId) 
     {
-        
+        flag[threadId] = false;
     }
 
     public int max(VolatileInt[] a){
