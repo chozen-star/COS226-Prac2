@@ -7,7 +7,12 @@ public class BakeryLock implements Lock
 
     public BakeryLock(int n) 
     {
-
+        flag = new VolatileBoolean(n);
+        label =new VolatileInt(n);
+        for(int i = 0; i < n; i++){
+            flag[i] = false;
+            label[i] = 0;
+        }
     }
 
     @Override
