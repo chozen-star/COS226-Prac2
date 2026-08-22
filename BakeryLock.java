@@ -9,10 +9,10 @@ public class BakeryLock implements Lock
     {
         this.n = n;
         flag = new VolatileBoolean[n];
-        label =new VolatileInt[n];
+        label = new VolatileInt[n];
         for(int i = 0; i < n; i++){
-            flag[i] = VolatileBoolean(false);
-            label[i] = VolatileInt(0);
+            flag[i] = new VolatileBoolean(false);
+            label[i] = new VolatileInt(0);
         }
     }
 
@@ -20,12 +20,12 @@ public class BakeryLock implements Lock
     public void lock(int threadId) 
     {
         flag[threadId].value = true;
-        label[threadId].label = max(label);
+        label[threadId].value = max(label);
         for(int j = 0; j < n;j++){
             if(j == threadId){
                 continue;
             }
-            while(flag[j] && (label[j] < label[threadId] || (label[j] == label[threadId] && j < threadId))){
+            while(flag[j].value && (label[j].value < label[threadId].value || (label[j].value == label[threadId].value && j < threadId))){
                 //wait
             }
         }
